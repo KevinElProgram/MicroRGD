@@ -1,0 +1,69 @@
+long valor;
+ 
+int LED_AZUL = D7;
+int LED_ROJO = D8;
+int LED_MINI = D4;
+ 
+void setup()
+{
+  Serial.begin(9600);
+  
+  Serial.println("Inicio de sketch - valores del potenciometro");
+ 
+  pinMode(LED_AZUL, OUTPUT);
+  pinMode(LED_ROJO, OUTPUT);
+  pinMode(LED_MINI, OUTPUT);
+}
+ 
+void loop()
+{
+  valor = analogRead(A0);
+  
+  Serial.print("El valor es = ");
+  Serial.println(valor);
+ 
+  if(valor >= 516 && valor <=1023)//valor igual o superior al valor medio
+  {
+      digitalWrite(LED_AZUL, HIGH);
+      digitalWrite(LED_ROJO, LOW);
+      digitalWrite(LED_MINI, HIGH);
+      
+  } 
+  
+  if (valor >19 && valor <516)//valor es menor que el valor medio. 
+
+  {
+      digitalWrite(LED_MINI,HIGH);
+      delay(500);//delay en ms
+      digitalWrite(LED_MINI,LOW);
+      delay(500);
+
+      digitalWrite(LED_AZUL, LOW);
+      digitalWrite(LED_ROJO, LOW);
+      digitalWrite(LED_MINI, LOW);
+     
+  }
+ 
+  if (valor >=19 && valor ==19)//valor es inferior al mínimo permitido
+  {
+    digitalWrite(LED_AZUL,LOW);
+    digitalWrite(LED_ROJO,LOW);
+    digitalWrite(LED_MINI,HIGH);
+    delay(500);
+      
+    digitalWrite(LED_AZUL,HIGH);
+    digitalWrite(LED_ROJO,HIGH);
+    digitalWrite(LED_MINI,LOW);
+     delay(500);
+      
+     
+    }
+ 
+  if (valor >19 && valor ==1024)//Valor Maximo
+  {
+      digitalWrite(LED_AZUL, LOW);
+      digitalWrite(LED_ROJO, HIGH);
+      digitalWrite(LED_MINI, HIGH);
+    
+   }
+}
